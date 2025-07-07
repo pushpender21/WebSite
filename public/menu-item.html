@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .product-details {
+            display: flex;
+            max-width: 800px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-details img {
+            max-width: 300px;
+            border-radius: 5px 0 0 5px;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        #add-to-cart {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #add-to-cart:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="product-details">
+            <img id="product-image" src="" alt="">
+            <div class="product-info">
+                <h1 id="product-title"></h1>
+                <p id="product-description"></p>
+                <p><strong>Price:</strong> <span id="product-price"></span></p>
+                <button id="add-to-cart">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+<script>
+
+        async function fetchProductDetails() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+            const response = await fetch(`http://localhost:5000/api/menu/starters/${id}`); // Adjust endpoint if necessary
+            
+            const product = await response.json();
+
+            document.getElementById('product-image').src = product.imageUrl;
+            document.getElementById('product-title').innerText = product.title;
+            document.getElementById('product-description').innerText = product.description;
+            document.getElementById('product-price').innerText = `$${product.price}`;
+        }
+
+        fetchProductDetails();
+
+</script>
+
+</body>
+</html>

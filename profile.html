@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f4f4;
+        }
+        .profile-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 90%;
+            max-width: 600px;
+            margin: 50px auto;
+        }
+        .profile-container p input{
+            background-color: rgb(255, 255, 255);
+            border: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="profile-container">
+        <h2>User Profile</h2>
+        <p><strong>Username:</strong> <span id="profileUsername"></span></p>
+        <p><strong>Password:</strong> <input type="password" id="profilePassword"></p>
+    </div>
+
+    <script>
+        
+        window.onload = function() {
+            const username = localStorage.getItem('loggedInUser');
+            const password = localStorage.getItem('loggedInPassword');
+            
+            if (username && password) {
+               
+                document.getElementById('profileUsername').textContent = username;
+                document.getElementById('profilePassword').value = password; 
+            } else {
+                
+                window.location.href = 'login.html';
+            }
+        };
+    </script>
+
+</body>
+</html>
